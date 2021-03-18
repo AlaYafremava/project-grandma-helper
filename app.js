@@ -9,8 +9,8 @@ const picturesRouter = require('./routes/pictures')
 middleware(app)
 dbConnection()
 
-app.use((req,res,next)=>{
-  if(req.session && req.session.user){
+app.use((req, res, next) => {
+  if (req.session && req.session.user) {
     res.locals.email = req.session.user.email
     res.locals.grandMother = req.session.user.oldwoman
   }
