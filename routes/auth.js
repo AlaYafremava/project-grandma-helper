@@ -7,7 +7,6 @@ const Pic = require('../models/pic')
 
 const saltRounds = 10;
 
-
 router
   .route('/registration')
 
@@ -60,8 +59,6 @@ router
   .post(async (req, res) => {
     const { email, password } = req.body;
     // console.log(email, password );
-
-
 
     const grandma = await Grandma.findOne({ email: email });
     // console.log(grandma);

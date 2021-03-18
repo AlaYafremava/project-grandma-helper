@@ -15,7 +15,7 @@ router.get('/new', (req, res) => {
 router.post("/new", async function (req, res, next) {
 
   let filedata = req.file;
-  // console.log(filedata);
+  console.log(filedata);
 
   if (!filedata) {
 
