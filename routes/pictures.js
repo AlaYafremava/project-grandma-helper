@@ -6,15 +6,19 @@ const Pic = require('../models/pic')
 
 router.get('/', async (req, res) => {
   const { user } = req.session
-  // let pictures = []
+  let pictures
 
-  // if (user.oldwoman && user.oldwoman === true) {
-  //   const grandma = await Grandma.findOne({email: user.email})
+  if (user.oldwoman && user.oldwoman === true) {
+    pictures = await Pic.find({ author: user._id })
 
-  //   pictures = grandma.pics
-  // }
+  } else {
+    const grandmaId = (await Son.findOne({email: user.email}).populate('grandma')).grandma._id
+    pictures = await Pic.find({ author: grandmaId })
+  }
 
-  res.render('pictures/pictures', user)
+  // console.log(pictures);
+
+  res.render('pictures/pictures', { user, pictures })
 })
 
 router.get('/new', (req, res) => {
@@ -25,20 +29,19 @@ router.post("/new", async function (req, res, next) {
 
   let filedata = req.file;
   // console.log(filedata);
- 
+
   if (!filedata) {
 
     res.send("Ошибка при загрузке файла");
   } else {
     let src1 = `/uploads/${req.file.filename}`
     // console.log(req.file.filename);
-    
-    const{user} = req.session
-    
-   const babka = await Grandma.findOne({email: user.email})
-   console.log(babka);
 
-    const newPic =  await Pic.create ({
+    const { user } = req.session
+
+    const babka = await Grandma.findOne({ email: user.email })
+
+    const newPic = await Pic.create({
       src: src1,
       author: user
     })
@@ -63,7 +66,9 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  res.render('pictires/pic', { src: pic.src, user })
+  console.log(pic.src);
+
+  res.render('pictures/pic', { src: pic.src, user })
 
 })
 
