@@ -3,6 +3,7 @@ const app = express()
 const dbConnection = require('./middleware/dbConnection')
 const middleware = require('./middleware')
 const errorHandler = require('./middleware/error')
+const authRouter = require('./routes/auth');
 const picturesRouter = require('./routes/pictures')
 
 middleware(app)
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
   res.redirect('/login')
 })
 
+app.use('/', authRouter)
 app.use('/pictures', picturesRouter)
 
 errorHandler(app)
