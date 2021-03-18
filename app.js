@@ -6,10 +6,10 @@ const errorHandler = require('./middleware/error')
 
 middleware(app)
 dbConnection()
-errorHandler(app)
 
 app.get('/', (req, res) => {
   res.render('pictures/pictures')
 })
 
+errorHandler(app)
 module.exports = app
