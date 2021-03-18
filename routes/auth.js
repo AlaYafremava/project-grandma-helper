@@ -53,6 +53,7 @@ router
 
 router
   .route("/login")
+
   .get(sessionChecker, (req, res) => {
     res.render("auth/login");
   })
