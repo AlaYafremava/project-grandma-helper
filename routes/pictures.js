@@ -16,7 +16,7 @@ router.get('/new', (req,res)=>{
 router.post("/new", async function (req, res, next) {
   
   let filedata = req.file;
-  // console.log(filedata);
+  console.log(filedata);
 
   if(!filedata) {
 
@@ -24,6 +24,7 @@ router.post("/new", async function (req, res, next) {
   } else {
     let src1 = `/uploads/${req.file.filename}`
     console.log(req.file.filename);
+    console.log(src1);
     res.render('pictures/new', {src1})
   }
 });
