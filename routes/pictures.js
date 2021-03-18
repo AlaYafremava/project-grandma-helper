@@ -43,4 +43,21 @@ router.post("/new", async function (req, res, next) {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  const { user } = req.session
+  let pic
+  
+  try {
+    pic = await Pic.findById(req.params.id)
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось получить запись из базы данных.',
+      error: {}
+    });
+  }
+
+  res.render('pictires/pic', { src: pic.src, user })
+
+})
+
 module.exports = router
