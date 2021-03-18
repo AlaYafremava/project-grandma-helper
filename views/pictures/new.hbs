@@ -6,14 +6,18 @@
   <form action="/pictures/new" method="post" enctype="multipart/form-data">
     <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
-        <input type="file" name="filedata">
+          <span>File</span>
+          <input class = 'button-new' type="file" name="filedata">
       </div>
       <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
+          <input class="file-path validate" type="text">
       </div>
+      <div class="button-new_send">
+        <input class="button-new  btn" type="submit" value="Send">
+      </div>
+           
+
     </div>
-    <input class="waves-effect waves-light btn" type="submit" value="Send">
   </form>
   {{#if src1}}
   <div class="bodyClass">
