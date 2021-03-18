@@ -12,6 +12,7 @@ inputStatus.addEventListener('click', (e) => {
   `
   }
 })
+
 inputStatusMa.addEventListener('click', (e) => {
   if (e.target.value) {
     document.querySelector('.gEmail').innerText = ''

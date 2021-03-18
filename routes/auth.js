@@ -8,15 +8,17 @@ const Pic = require('../models/pic')
 const saltRounds = 10;
 
 
-
 router
   .route('/registration')
+
   .get(sessionChecker, (req, res) => {
+
     // console.log(666);
     res.render('auth/registration');
   })
   .post(async (req, res, next) => {
     try {
+
       // console.log(req.body.name);
       const { name, email, password, status, grandmaEmail } = req.body
       // console.log(req.body);
