@@ -8,8 +8,8 @@
     <p> Let's add some new pictures!</p>
   </div>
   <div>
-    <button id="instruction" class="waves-effect waves-light btn">instruction</button>
-    <button id="add-pic" class="waves-effect waves-light btn">add pic</button>
+    <a href="instruction"><button id="instruction" class="waves-effect waves-light btn">instruction</button></a>
+    <a href="pictures/new"><button id="add-pic" class="waves-effect waves-light btn">add pic</button></a>
   </div>
   {{else}}
   {{#if pictures}}
@@ -23,13 +23,15 @@
   {{/if}}
   {{/if}}
 </div>
-{{!-- {{#each pictures}} --}}
+
+{{#each pictures}}
 <div class="row">
   <div class="col s12 m6">
     <div class="card">
-      <div class="card-image">
-        <img src={{src}}>
-        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      <div id={{this._id}} class="card-image">
+        <img src={{this.src}}>
+        <a href=pictures/{{this.id}} id='open-pic' class="btn-floating halfway-fab waves-effect waves-light red"><i
+            class="material-icons">add</i></a>
       </div>
       <div class="card-action">
         <a href="">read</a>
@@ -40,4 +42,4 @@
     </div>
   </div>
 </div>
-{{!-- {{/each}} --}}
+{{/each}}
