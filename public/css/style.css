@@ -7,3 +7,28 @@ body {
 main {
   flex: 1 0 auto;
 }
+.page-footer{
+  padding-top: 0;
+}
+.row{
+  margin-bottom: 0;
+}
+.white-text{
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+#footer-text{
+  margin-top: 3px;
+margin-bottom: 2px;
+}
+.body-button{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 7px;
+}
+@media (min-width: 601px){
+.row .col.m6 {
+    width: 40%;
+}
+}

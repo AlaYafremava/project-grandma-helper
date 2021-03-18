@@ -10,6 +10,7 @@ dbConnection()
 app.get('/', (req, res) => {
   res.redirect('/login')
 })
+errorHandler(app)
 
 errorHandler(app)
 
