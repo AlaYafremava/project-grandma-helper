@@ -8,8 +8,11 @@ middleware(app)
 dbConnection()
 
 app.get('/', (req, res) => {
-  res.render('pictures/pictures')
+  res.redirect('/login')
 })
 errorHandler(app)
 
+errorHandler(app)
+
+errorHandler(app)
 module.exports = app

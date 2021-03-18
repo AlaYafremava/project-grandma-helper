@@ -8,6 +8,10 @@ module.exports = (app) => {
   const { cookiesCleaner } = require("./auth");
   const hbs = require('hbs')
 
+  const authRouter = require('../routes/auth');
+  const instructionRouter = require('../routes/instruction');
+  const picturesRouter = require('../routes/pictures');
+
   app.use(morgan("dev"));
 
   // Body POST запросов.
@@ -33,6 +37,10 @@ module.exports = (app) => {
 
   // app.use(cookiesCleaner);
 
+  app.use('/', authRouter);
+  // app.use('/pictures', instructionRouter);
+  // app.use('/', picturesRouter);
+
   // Подключаем статику
   app.use(express.static(path.join(__dirname, '..', "public")));
 
@@ -40,7 +48,7 @@ module.exports = (app) => {
   app.set("views", path.join(__dirname, '..', "views"));
   app.set("view engine", "hbs");
 
-  console.log(__dirname);
+  // console.log(__dirname);
 
   hbs.registerPartials(path.join(__dirname, '..', '/views/partials'));
 }
