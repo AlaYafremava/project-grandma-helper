@@ -14,4 +14,5 @@ errorHandler(app)
 
 errorHandler(app)
 
+errorHandler(app)
 module.exports = app
