@@ -11,7 +11,7 @@ const saltRounds = 10;
 
 router
   .route('/registration')
-  .get((req, res) => {
+  .get(sessionChecker, (req, res) => {
     // console.log(666);
     res.render('auth/registration');
   })
@@ -29,14 +29,19 @@ router
         await newGrandma.save();
         req.session.user = newGrandma;
       } else {
-        const newSon = new Son({
-          name,
-          email,
-          password: await bcrypt.hash(password, saltRounds),
-          grandmaEmail
-        })
-        await newSon.save();
-        req.session.user = newSon;
+        const grandmaNewSon = await Grandma.findOne({ email: grandmaEmail })
+        if (grandmaNewSon) {
+          const newSon = new Son({
+            name,
+            email,
+            password: await bcrypt.hash(password, saltRounds),
+            grandma: grandmaNewSon
+          })
+          await newSon.save();
+          req.session.user = newSon;
+        } else {
+          res.redirect("/registration");
+        }
       }
       res.redirect("/pictures");
     } catch (error) {
@@ -46,7 +51,7 @@ router
 
 router
   .route("/login")
-  .get((req, res) => {
+  .get(sessionChecker, (req, res) => {
     res.render("auth/login");
   })
   .post(async (req, res) => {
@@ -66,10 +71,10 @@ router
       res.redirect("/pictures");
     } else {
       res.redirect("/login");
-    } 
+    }
   });
 
-router.get("/logout", async (req, res, next) => {
+router.get("/logout", sessionChecker, async (req, res, next) => {
   if (req.session.user) {
     try {
       await req.session.destroy();
