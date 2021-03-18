@@ -2,11 +2,7 @@ const router = require('express').Router()
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
-//read img
-const { createWorker } = require('../node_modules/tesseract.js');
-const worker = createWorker({
-  logger: (data) => console.log(data)
-});
+
 
 router.get('/', async (req, res) => {
   const { user } = req.session
@@ -70,24 +66,22 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  console.log(pic.src);
+  // console.log(pic.src);
+  
+  res.render('pictures/pic', { src: pic.src, id:pic.id, user })
 
-  res.render('pictures/pic', { src: pic.src, user })
+})
 
+
+router.post('/:id', async (req,res)=>{
+  
+  let pic = await Pic.findById(req.params.id)
+ 
+  return res.json({pic:pic})
 })
 
 module.exports = router
 
 
 //read img
-async function recognize() {
-  const file = document.getElementById('file').files[0];
-  const lang = document.getElementById('langs').value;
-  await worker.load();
-  await worker.loadLanguage(lang);
-  await worker.initialize(lang);
-  const { data: { text } } = await worker.recognize(file);
-  console.log(text);
-  await worker.terminate();
-  return text;
-}
+
