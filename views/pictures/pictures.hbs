@@ -23,13 +23,15 @@
   {{/if}}
   {{/if}}
 </div>
+
 {{#each pictures}}
 <div class="row">
   <div class="col s12 m6">
     <div class="card">
-      <div id={{id}} class="card-image">
-        <img src={{src}}>
-        <button id='open-pic' class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></button>
+      <div id={{this._id}} class="card-image">
+        <img src={{this.src}}>
+        <a href=pictures/{{this.id}} id='open-pic' class="btn-floating halfway-fab waves-effect waves-light red"><i
+            class="material-icons">add</i></a>
       </div>
       <div class="card-action">
         <a href="">read</a>
