@@ -38,7 +38,7 @@ module.exports = (app) => {
     })
   );
 
-  // app.use(cookiesCleaner);
+  app.use(cookiesCleaner);
 
   app.use('/', authRouter);
   // app.use('/pictures', instructionRouter);

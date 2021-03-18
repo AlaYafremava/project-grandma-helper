@@ -1,12 +1,11 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const { cookiesCleaner, sessionChecker } = require('../middleware/auth')
+const { sessionChecker } = require('../middleware/auth')
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
 
 const saltRounds = 10;
-
 
 router
   .route('/registration')
@@ -21,7 +20,7 @@ router
 
       // console.log(req.body.name);
       const { name, email, password, status, grandmaEmail } = req.body
-      // console.log(req.body);
+      // console.log(name, email, password, status, grandmaEmail);
       if (status === "statusGrandma") {
         const newGrandma = new Grandma({
           name,
@@ -77,7 +76,7 @@ router
     }
   });
 
-router.get("/logout", sessionChecker, async (req, res, next) => {
+router.get("/logout", async (req, res, next) => {
   if (req.session.user) {
     try {
       await req.session.destroy();
