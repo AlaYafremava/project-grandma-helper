@@ -1,6 +1,7 @@
 //pictures
 
 const router = require('express').Router()
+
 const Grandma = require('../models/grandma')
 const Pic = require('../models/pic')
 
@@ -25,7 +26,6 @@ router.post("/new", async function (req, res, next) {
     console.log(req.file.filename);
     res.render('pictures/new', {src1})
   }
-      
-  
 });
+
 module.exports = router
