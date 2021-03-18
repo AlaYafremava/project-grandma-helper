@@ -1,14 +1,11 @@
-
 //read img
 // const { createWorker } = require('../node_modules/tesseract.js');
 // const worker = createWorker({
 //   logger: (data) => console.log(data)
 // });
 
+// const readFile = document.querySelector('#readFile')
 
-
-
-const readFile = document.querySelector('#readFile')
 
 readFile.addEventListener('click', async()=>{
  
@@ -27,10 +24,30 @@ readFile.addEventListener('click', async()=>{
    
   })
   const responseJson = await response.json()
-
   
 })
 
+const deleteBtn = document.querySelector('#deleteFile')
+console.log(deleteBtn);
+
+deleteBtn.addEventListener('click', async () => {
+
+  const divPic = document.querySelector('.divPic')
+  const id = divPic.id
+  // console.log(id);
+
+  const response = await fetch(`/pictures/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "Application/json"
+    }
+  })
+  const result = await response.json()
+
+  if (result.success) {
+    divPic.remove()
+  }
+})
 
 // async function recognize(req,res) {
 //   const file = document.getElementById('file').files[0];
@@ -43,3 +60,4 @@ readFile.addEventListener('click', async()=>{
 //   await worker.terminate();
 //   return text;
 // }
+

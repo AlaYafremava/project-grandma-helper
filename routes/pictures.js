@@ -2,6 +2,15 @@ const router = require('express').Router()
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
+const Tesseract = require('tesseract.js');
+
+Tesseract.recognize(
+  'https://tesseract.projectnaptha.com/img/eng_bw.png',
+  'eng',
+  { logger: m => console.log(m) }
+).then(({ data: { text } }) => {
+  console.log(text);
+})
 
 
 router.get('/', async (req, res) => {
@@ -12,7 +21,7 @@ router.get('/', async (req, res) => {
     pictures = await Pic.find({ author: user._id })
 
   } else {
-    const grandmaId = (await Son.findOne({email: user.email}).populate('grandma')).grandma._id
+    const grandmaId = (await Son.findOne({ email: user.email }).populate('grandma')).grandma._id
     pictures = await Pic.find({ author: grandmaId })
   }
 
@@ -66,22 +75,34 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  // console.log(pic.src);
-  
   res.render('pictures/pic', { src: pic.src, id:pic.id, user })
 
 })
 
-
+//reader
 router.post('/:id', async (req,res)=>{
   
   let pic = await Pic.findById(req.params.id)
  
   return res.json({pic:pic})
+
+  res.render('pictures/pic', { src: pic.src, id: pic._id, user })
+
+})
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    await Pic.findByIdAndDelete(id)
+    res.json({ success: true })
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось получить запись из базы данных.',
+      error: {}
+    })
+  }
+  res.redirect('/pictures')
+
 })
 
 module.exports = router
-
-
-//read img
-
