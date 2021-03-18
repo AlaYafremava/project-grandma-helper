@@ -1,0 +1,24 @@
+<div class='body-button'>
+  <div>
+    <p>Вы можете загрузить фото</p>
+  </div>
+
+  <form action="/pictures/new" method="post" enctype="multipart/form-data">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" name="filedata">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+      <input type="submit" value="Send">
+  </form>
+{{#if src1}}
+<div class="bodyClass">
+  <img class='newImg' src={{src1}}>
+</div>
+{{/if}}
+
+</div>

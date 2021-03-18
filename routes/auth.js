@@ -34,11 +34,11 @@ router
     }
   })
 
-// router
-//   .route("/login")
-//   .get(, (req, res) => {
-//     res.render("auth/login");
-//   })
+router
+  .route("/login")
+  .get( (req, res) => {
+    res.render("auth/login");
+  })
 //   .post(async (req, res) => {
 //     const { name, password } = req.body;
 
