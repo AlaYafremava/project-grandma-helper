@@ -23,7 +23,8 @@ router.post("/new", async function (req, res, next) {
     res.send("Ошибка при загрузке файла");
   } else {
     let src1 = `/uploads/${req.file.filename}`
-    console.log(req.file.filename);
+    // console.log(req.file.filename);
+    console.log(src1);
     res.render('pictures/new', {src1})
   }
 });

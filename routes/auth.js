@@ -22,7 +22,7 @@ router
       // console.log(req.body.name);
       const { name, email, password, status, grandmaEmail } = req.body
       // console.log(req.body);
-      if (status.value === "statusGrandma") {
+      if (status === "statusGrandma") {
         const newGrandma = new Grandma({
           name,
           email,
