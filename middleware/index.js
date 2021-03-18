@@ -10,10 +10,6 @@ module.exports = (app) => {
 
   const multer = require('multer')
 
-  const authRouter = require('../routes/auth');
-  const instructionRouter = require('../routes/instruction');
-  const picturesRouter = require('../routes/pictures');
-
   app.use(morgan("dev"));
 
   app.use(multer({dest:"public/uploads"}).single("filedata"));
@@ -39,10 +35,6 @@ module.exports = (app) => {
   );
 
   app.use(cookiesCleaner);
-
-  app.use('/', authRouter);
-  // app.use('/pictures', instructionRouter);
-  // app.use('/', picturesRouter);
 
   // Подключаем статику
   app.use(express.static(path.join(__dirname, '..', "public")));
