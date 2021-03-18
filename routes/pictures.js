@@ -75,6 +75,17 @@ router.get('/:id', async (req, res) => {
     });
   }
 
+  res.render('pictures/pic', { src: pic.src, id:pic.id, user })
+
+})
+
+//reader
+router.post('/:id', async (req,res)=>{
+  
+  let pic = await Pic.findById(req.params.id)
+ 
+  return res.json({pic:pic})
+
   res.render('pictures/pic', { src: pic.src, id: pic._id, user })
 
 })
@@ -91,6 +102,7 @@ router.delete('/:id', async (req, res) => {
     })
   }
   res.redirect('/pictures')
+
 })
 
 module.exports = router

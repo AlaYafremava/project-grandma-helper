@@ -1,4 +1,3 @@
-
 //read img
 // const { createWorker } = require('../node_modules/tesseract.js');
 // const worker = createWorker({
@@ -7,23 +6,26 @@
 
 // const readFile = document.querySelector('#readFile')
 
-// readFile.addEventListener('click', async(e)=>{
-//   e.preventDefault()
 
-// })
+readFile.addEventListener('click', async()=>{
+ 
+  const divPic = document.querySelector('.divPic')
+  const id = divPic.id
+
+   console.log(divPic);
 
 
-// async function recognize(req,res) {
-//   const file = document.getElementById('file').files[0];
-//   const lang = 'rus'
-//   await worker.load();
-//   await worker.loadLanguage(lang);
-//   await worker.initialize(lang);
-//   const { data: { text } } = await worker.recognize(file);
-//   console.log(text);
-//   await worker.terminate();
-//   return text;
-// }
+
+  const response = await fetch(`/pictures/${id}`,{
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json'
+    },
+   
+  })
+  const responseJson = await response.json()
+  
+})
 
 const deleteBtn = document.querySelector('#deleteFile')
 console.log(deleteBtn);
@@ -46,4 +48,16 @@ deleteBtn.addEventListener('click', async () => {
     divPic.remove()
   }
 })
+
+// async function recognize(req,res) {
+//   const file = document.getElementById('file').files[0];
+//   const lang = 'rus'
+//   await worker.load();
+//   await worker.loadLanguage(lang);
+//   await worker.initialize(lang);
+//   const { data: { text } } = await worker.recognize(file);
+//   console.log(text);
+//   await worker.terminate();
+//   return text;
+// }
 
