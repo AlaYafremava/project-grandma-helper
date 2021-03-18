@@ -2,6 +2,15 @@ const router = require('express').Router()
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
+const Tesseract = require('tesseract.js');
+
+Tesseract.recognize(
+  'https://tesseract.projectnaptha.com/img/eng_bw.png',
+  'eng',
+  { logger: m => console.log(m) }
+).then(({ data: { text } }) => {
+  console.log(text);
+})
 
 
 router.get('/', async (req, res) => {
@@ -12,7 +21,7 @@ router.get('/', async (req, res) => {
     pictures = await Pic.find({ author: user._id })
 
   } else {
-    const grandmaId = (await Son.findOne({email: user.email}).populate('grandma')).grandma._id
+    const grandmaId = (await Son.findOne({ email: user.email }).populate('grandma')).grandma._id
     pictures = await Pic.find({ author: grandmaId })
   }
 
