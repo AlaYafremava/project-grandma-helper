@@ -66,10 +66,18 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  console.log(pic.src);
+  // console.log(pic.src);
+  
+  res.render('pictures/pic', { src: pic.src, id:pic.id, user })
 
-  res.render('pictures/pic', { src: pic.src, user })
+})
 
+
+router.post('/:id', async (req,res)=>{
+  
+  let pic = await Pic.findById(req.params.id)
+ 
+  return res.json({pic:pic})
 })
 
 module.exports = router
