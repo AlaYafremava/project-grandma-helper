@@ -15,7 +15,7 @@ readFile.addEventListener('click', async()=>{
   const divPic = document.querySelector('.divPic')
   const id = divPic.id
 
-  console.log(divPic);
+   console.log(divPic);
 
 
 
