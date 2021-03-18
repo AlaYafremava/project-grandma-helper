@@ -32,3 +32,14 @@ margin-bottom: 2px;
     width: 40%;
 }
 }
+
+.bodyClass img{
+  margin-top: 45px;
+  max-width: 800px ;
+  /* height: 400px ; */
+}
+
+.button-new_send .button-new{
+width:62px
+}
+

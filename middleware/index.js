@@ -8,12 +8,15 @@ module.exports = (app) => {
   const { cookiesCleaner } = require("./auth");
   const hbs = require('hbs')
 
+  const multer = require('multer')
+
   const authRouter = require('../routes/auth');
   const instructionRouter = require('../routes/instruction');
   const picturesRouter = require('../routes/pictures');
 
   app.use(morgan("dev"));
 
+  app.use(multer({dest:"public/uploads"}).single("filedata"));
   // Body POST запросов.
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -35,7 +38,7 @@ module.exports = (app) => {
     })
   );
 
-  // app.use(cookiesCleaner);
+  app.use(cookiesCleaner);
 
   app.use('/', authRouter);
   // app.use('/pictures', instructionRouter);
