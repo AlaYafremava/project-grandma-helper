@@ -1,9 +1,10 @@
-const button = document.querySelector('#add-pic')
-// console.log(button);
+const btnAddPic = document.querySelector('#add-pic')
 
-button.addEventListener('click', async (event)=> {
+btnAddPic.addEventListener('click', async (event)=> {
 // console.log(event.target);
 
 await fetch('/pictures/new')
 
 })
+
+
