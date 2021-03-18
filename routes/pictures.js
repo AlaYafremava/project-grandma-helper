@@ -8,8 +8,16 @@ const worker = createWorker({
   logger: (data) => console.log(data)
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const { user } = req.session
+  // let pictures = []
+
+  // if (user.oldwoman && user.oldwoman === true) {
+  //   const grandma = await Grandma.findOne({email: user.email})
+
+  //   pictures = grandma.pics
+  // }
+
   res.render('pictures/pictures', user)
 })
 
@@ -49,7 +57,7 @@ router.post("/new", async function (req, res, next) {
 router.get('/:id', async (req, res) => {
   const { user } = req.session
   let pic
-  
+
   try {
     pic = await Pic.findById(req.params.id)
   } catch (error) {
