@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
   if (user.oldwoman && user.oldwoman === true) {
     pictures = await Pic.find({ author: user._id })
 
-  } else {
+  } else  {
     const grandmaId = (await Son.findOne({ email: user.email }).populate('grandma')).grandma._id
     pictures = await Pic.find({ author: grandmaId })
   }
