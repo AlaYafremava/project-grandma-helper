@@ -36,4 +36,6 @@ deleteBtn.addEventListener('click', async () => {
   }
 })
 
+// const formNewPic = document.querySelector('.formNewPic')
+// console.log(formNewPic);
 
