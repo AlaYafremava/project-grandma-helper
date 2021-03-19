@@ -1,12 +1,12 @@
 const btnReadFile = document.querySelector('#readFile')
 // console.log(btnReadFile);
 
-btnReadFile?.addEventListener('click', async()=>{
- 
+btnReadFile?.addEventListener('click', async () => {
+
   const divPic = document.querySelector('.divPic')
   const id = divPic.id
 
-  const response = await fetch(`/pictures/${id}`,{
+  const response = await fetch(`/pictures/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -16,11 +16,26 @@ btnReadFile?.addEventListener('click', async()=>{
 
   document.querySelector('.readedText').innerHTML += `
   <div><p>${text}</p><div>
-  <button class="waves-effect waves-light btn-large deleteFileButton">Listen it</button>
+  <button class="waves-effect waves-light btn-large listenFileButton">Listen it</button>
   `
 
-  console.log(text);
+  // console.log(text);
+
+  const btnListenFile = document.querySelector('.listenFileButton')
+
+  console.log(btnListenFile);
+
+  btnListenFile.addEventListener('click', async () => {
+    console.log(text);
+    // const response = await fetch(`/pictures/${id}`)
+    speechSynthesis.speak(
+      new SpeechSynthesisUtterance(text)
+    );
+
+  })
 })
+
+
 
 //удалить картинку со страницы pictures/:id
 const deleteBtn = document.querySelectorAll('.deleteFileButton')
@@ -33,7 +48,7 @@ deleteBtn?.forEach((el) => {
     // console.log(divPic);
     const id = divPic.id
     // console.log(id);
-  
+
     const response = await fetch(`/pictures/${id}`, {
       method: "DELETE",
       headers: {
@@ -43,7 +58,7 @@ deleteBtn?.forEach((el) => {
 
     })
     const result = await response.json()
-  
+
     if (result.success) {
       divPic.remove()
     }
