@@ -1,18 +1,12 @@
-//read img
-// const { createWorker } = require('../node_modules/tesseract.js');
-// const worker = createWorker({
-//   logger: (data) => console.log(data)
-// });
+const btnReadFile = document.querySelector('#readFile')
+// console.log(btnReadFile);
 
-// const readFile = document.querySelector('#readFile')
-
-
-readFile.addEventListener('click', async () => {
-
+btnReadFile.addEventListener('click', async()=>{
+ 
   const divPic = document.querySelector('.divPic')
   const id = divPic.id
 
-  const response = await fetch(`/pictures/${id}`, {
+  const response = await fetch(`/pictures/${id}`,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -22,7 +16,6 @@ readFile.addEventListener('click', async () => {
 })
 
 const deleteBtn = document.querySelector('#deleteFile')
-console.log(deleteBtn);
 
 deleteBtn.addEventListener('click', async () => {
 
@@ -43,15 +36,4 @@ deleteBtn.addEventListener('click', async () => {
   }
 })
 
-// async function recognize(req,res) {
-//   const file = document.getElementById('file').files[0];
-//   const lang = 'rus'
-//   await worker.load();
-//   await worker.loadLanguage(lang);
-//   await worker.initialize(lang);
-//   const { data: { text } } = await worker.recognize(file);
-//   console.log(text);
-//   await worker.terminate();
-//   return text;
-// }
 
