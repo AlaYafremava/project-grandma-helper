@@ -21,7 +21,7 @@ const deleteBtn = document.querySelector('#deleteFile')
 
 deleteBtn.addEventListener('click', async () => {
 
-  const divPic = document.querySelector('.divPic')
+  const  divPic = document.querySelector('.divPic')
   const id = divPic.id
   // console.log(id);
 
