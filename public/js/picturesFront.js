@@ -15,7 +15,7 @@ btnReadFile?.addEventListener('click', async () => {
   const text = await response.json()
 
   document.querySelector('.readedText').innerHTML += `
-  <div><p>${text}</p><div>
+  <div class='readedText'><p class='readedText_p'>${text}</p><div>
   <button class="waves-effect waves-light btn-large listenFileButton">Listen it</button>
   `
 
