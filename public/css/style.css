@@ -50,6 +50,15 @@ margin-bottom: 2px;
 width:62px
 }
 #fotoSection{
+  display: flex;
+ 
+  padding-left: 15px;
+
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 25px;
+
   position: relative;
   width: 100%;
   background: url('../img/sombrero-1082322_1920.jpg') no-repeat center center fixed;
@@ -191,4 +200,17 @@ p{
 }
 .bodyClass{
   margin-left: 50px;
+}
+.readedText_p{
+  background-color: rgb(243, 154, 154);
+  opacity: 0.7;
+  border-radius:12px;
+  min-height: 30px;
+  padding: 10px;
+  max-width: 50%;
+  
+}
+.readedText_p:hover{
+  /* background-color: rgb(202, 199, 199); */
+  opacity: 0.9;
 }
