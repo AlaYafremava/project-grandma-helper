@@ -5,6 +5,7 @@ const middleware = require('./middleware')
 const errorHandler = require('./middleware/error')
 const authRouter = require('./routes/auth');
 const picturesRouter = require('./routes/pictures')
+const instuctionRouter = require('./routes/instruction')
 
 middleware(app)
 dbConnection()
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.use('/', authRouter)
 app.use('/pictures', picturesRouter)
+app.use('/', instuctionRouter)
 
 errorHandler(app)
 
