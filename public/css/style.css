@@ -101,6 +101,7 @@ nav{
   font-size: 35px;
   font-family: 'Ranchers', cursive;
   color: rgba(0, 0, 0, 0.76);
+  margin-bottom: 10px;
 }
 .body-button_text{
   font-weight: 500;
@@ -155,4 +156,39 @@ nav{
   }
 .body-title{
   justify-content: space-around;
+}
+.instruction-text{
+  padding-left: 35px;
+  padding-right: 50px;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.5;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 15px;
+}
+.instruction-text:hover{
+ 
+  opacity:0.8;
+}
+.instruction-item{
+  max-width: 65%;
+  list-style-type:decimal !important;
+  margin-left: 25px;
+}
+p{
+  margin: 0;
+  padding: 0;
+}
+.box-page{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.pictures-Width{
+  width: 40%;
+}
+.bodyClass{
+  margin-left: 50px;
 }
