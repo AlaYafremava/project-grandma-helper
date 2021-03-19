@@ -14,6 +14,11 @@ btnReadFile?.addEventListener('click', async()=>{
   })
   const text = await response.json()
 
+  document.querySelector('.readedText').innerHTML += `
+  <div><p>${text}</p><div>
+  <button class="waves-effect waves-light btn-large deleteFileButton">Listen it</button>
+  `
+
   console.log(text);
 })
 
@@ -33,7 +38,9 @@ deleteBtn?.forEach((el) => {
       method: "DELETE",
       headers: {
         "Content-type": "Application/json"
-      }
+      },
+      body: JSON.stringify(id)
+
     })
     const result = await response.json()
   
