@@ -4,14 +4,17 @@ const Son = require('../models/son')
 const Pic = require('../models/pic')
 const Tesseract = require('tesseract.js');
 
-Tesseract.recognize(
-  'https://tesseract.projectnaptha.com/img/eng_bw.png',
-  'eng',
-  { logger: m => console.log(m) }
-).then(({ data: { text } }) => {
-  console.log(text);
-})
-
+const reader = (src) => {
+  Tesseract.recognize(
+    src,
+    'eng'
+    // { logger: m => console.log(m) }
+  ).then(({ data: { text } }) => {
+    console.log(text);
+    console.log(typeof text);
+    return text;
+  })
+}
 
 router.get('/', async (req, res) => {
   const { user } = req.session
@@ -44,20 +47,23 @@ router.post("/new", async function (req, res, next) {
     res.send("Ошибка при загрузке файла");
   } else {
     let src1 = `/uploads/${req.file.filename}`
-    // console.log(req.file.filename);
+    let readerPath = `./public${src1}`
+    // console.log(readerPath);
+
+    const text = reader(readerPath)
 
     const { user } = req.session
-
     const babka = await Grandma.findOne({ email: user.email })
 
     const newPic = await Pic.create({
       src: src1,
-      author: user
+      author: user,
+      text
     })
 
     babka.pics.push(newPic)
     await babka.save()
-
+    // filedata
     res.render('pictures/new', { src1 })
   }
 });
@@ -75,18 +81,22 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  res.render('pictures/pic', { src: pic.src, id:pic.id, user })
+  res.render('pictures/pic', { src: pic.src, id: pic.id, user })
 
 })
 
 //reader
-router.post('/:id', async (req,res)=>{
-  
-  let pic = await Pic.findById(req.params.id)
- 
-  return res.json({pic:pic})
+router.post('/:id', async (req, res) => {
 
-  res.render('pictures/pic', { src: pic.src, id: pic._id, user })
+  let pic = await Pic.findById(req.params.id)
+  console.log(pic.src);
+  let path = `./public${pic.src}`
+
+  reader(path)
+
+  // return res.json({ pic: pic })
+
+  // res.render('pictures/pic', { src: pic.src, id: pic._id, user })
 
 })
 
