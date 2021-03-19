@@ -7,6 +7,14 @@ const path = require('path')
 const Tesseract = require('tesseract.js')
 const { send } = require('process')
 
+// automatically pick platform
+const say = require('say')
+
+// or, override the platform
+// const Say = require('say').Say
+// const say = new Say('darwin' || 'win32' || 'linux')
+
+
 router.get('/', async (req, res) => {
   const { user } = req.session
   let pictures
@@ -21,13 +29,13 @@ router.get('/', async (req, res) => {
 
   // console.log(pictures);
 
-  res.render('pictures/pictures', { user, pictures })
+  res.render('pictures/pictures', { user, pictures, title: 'Collections of pictures' })
 })
 
 router.delete('/', async (req, res) => {
   try {
     const id = req.body.id
-    // console.log('>>>>>>>>>>>>>>', id);
+
     await Pic.findByIdAndDelete(id)
     console.log(id);
 
@@ -109,21 +117,29 @@ router.post('/:id', async (req, res) => {
     encoding: null
   })
 
+  if (!pic.text === '') {
+    res.json(pic.text)
+
+  }
+
   Tesseract.recognize(
     img,
     'rus', { logger: data => console.log(data) })
     .then(async ({ data: { text } }) => {
       pic.text = text
       await pic.save()
-      // res.send(text)
-      // res.send(result.lines)
+      res.json(text)
     })
-
-  // pic.text = await recognize()
-
-  // await pic.save()
-
 })
+
+router.post('/:id', async (req, res) => {
+  let pic = await Pic.findById(req.params.id)
+
+  say.speak(pic.text)
+
+  console.log('Text has been spoken.')
+});
+
 
 router.delete('/:id', async (req, res) => {
   try {

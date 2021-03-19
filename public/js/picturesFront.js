@@ -14,8 +14,28 @@ btnReadFile?.addEventListener('click', async () => {
   })
   const text = await response.json()
 
-  console.log(text);
+  document.querySelector('.readedText').innerHTML += `
+  <div class='readedText'><p class='readedText_p'>${text}</p><div>
+  <button class="waves-effect waves-light btn-large listenFileButton">Listen it</button>
+  `
+
+  // console.log(text);
+
+  const btnListenFile = document.querySelector('.listenFileButton')
+
+  console.log(btnListenFile);
+
+  btnListenFile.addEventListener('click', async () => {
+    console.log(text);
+    // const response = await fetch(`/pictures/${id}`)
+    speechSynthesis.speak(
+      new SpeechSynthesisUtterance(text)
+    );
+
+  })
 })
+
+
 
 //удалить картинку со страницы pictures/:id
 const deleteBtn = document.querySelector('#deleteFile')
@@ -53,15 +73,18 @@ deleteButtons?.forEach(del => {
     const divPic = document.getElementById(`${id2}`)
     
     const response = await fetch('/pictures', {
+
       method: "DELETE",
       headers: {
         "Content-type": "Application/json"
       },
       body: JSON.stringify({id: divPic.id})
+
     })
 
     const result = await response.json()
     // console.log(result);
+
     if (result.success) {
       divPic.remove()
       window.location.href = '/'
