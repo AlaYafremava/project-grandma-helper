@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   if (user.oldwoman && user.oldwoman === true) {
     pictures = await Pic.find({ author: user._id })
 
-  } else  {
+  } else {
     const grandmaId = (await Son.findOne({ email: user.email }).populate('grandma')).grandma._id
     pictures = await Pic.find({ author: grandmaId })
   }
@@ -40,25 +40,20 @@ router.get('/new', (req, res) => {
 router.post("/new", async function (req, res, next) {
 
   let filedata = req.file;
-  // console.log(filedata);
+  console.log(filedata);
 
   if (!filedata) {
 
     res.send("Ошибка при загрузке файла");
   } else {
     let src1 = `/uploads/${req.file.filename}`
-    let readerPath = `./public${src1}`
-    // console.log(readerPath);
-
-    const text = reader(readerPath)
 
     const { user } = req.session
     const babka = await Grandma.findOne({ email: user.email })
 
     const newPic = await Pic.create({
       src: src1,
-      author: user,
-      text
+      author: user
     })
 
     babka.pics.push(newPic)

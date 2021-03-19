@@ -1,28 +1,33 @@
 <div class='body-button'>
   <div>
-    <p>Вы можете загрузить фото</p>
+    <p>Please add new pictures</p>
   </div>
 
-  <form action="/pictures/new" method="post" enctype="multipart/form-data">
+  <form class="formNewPic" action="/pictures/new" method="post" enctype="multipart/form-data">
+
     <div class="file-field input-field">
+
       <div class="btn">
         <span>File</span>
-        <input class='button-new filedata' type="file" name="filedata">
+        <input class='button-new' type="file" name="filedata">
       </div>
+
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
+
       <div class="button-new_send">
-        <buttom class="button-new btn">Send</button>
+        <button class="button-new btn">Send</button>
       </div>
 
-
     </div>
+
   </form>
+
+</div>
+
   {{#if src1}}
   <div class="bodyClass">
     <img class='newImg' src={{src1}}>
   </div>
   {{/if}}
-
-</div>
