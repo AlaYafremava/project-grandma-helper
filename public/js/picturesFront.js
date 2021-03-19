@@ -8,13 +8,11 @@ btnReadFile.addEventListener('click', async()=>{
 
   const response = await fetch(`/pictures/${id}`,{
     method: 'POST',
-    headers:{
+    headers: {
       'Content-Type': 'application/json'
-    },
-   
+    }
   })
   const responseJson = await response.json()
-  
 })
 
 const deleteBtn = document.querySelector('#deleteFile')
