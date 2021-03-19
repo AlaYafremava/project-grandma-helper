@@ -1,15 +1,15 @@
 <div class='body-button'>
-  <div>
+  <div class = 'body-button_name' >
     <p> Hello, {{this.name}}!</p>
     <p> We are glade to see you!</p>
   </div>
   {{#if grandMother}}
-  <div>
+  <div class="body-button_text">
     <p> Let's add some new pictures!</p>
   </div>
-  <div>
-    <a href="instruction"><button id="instruction" class="waves-effect waves-light btn">instruction</button></a>
-    <a href="pictures/new"><button id="add-pic" class="waves-effect waves-light btn">add pic</button></a>
+  <div class="body-button_button">
+    <a  href="instruction"><button id="instruction" class="body-button-a waves-effect waves-light btn">instruction</button></a>
+    <a  href="pictures/new"><button id="add-pic" class="body-button-a waves-effect waves-light btn">add pic</button></a>
   </div>
   {{else}}
   {{#if pictures}}
