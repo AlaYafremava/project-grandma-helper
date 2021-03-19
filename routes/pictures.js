@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const Tesseract = require('tesseract.js')
 const { send } = require('process')
+
 // automatically pick platform
 const say = require('say')
 
@@ -34,17 +35,17 @@ router.get('/', async (req, res) => {
 router.delete('/', async (req, res) => {
   try {
     const id = req.body.id
-    console.log(id);
+
     await Pic.findByIdAndDelete(id)
-    res.json({ success: true })
+    console.log(id);
+
+    return res.json({ success: true })
   } catch (error) {
-    return res.render('error', {
-      message: 'Не удалось получить запись из базы данных.',
-      error: {}
-    })
+    return error
   }
-  res.redirect('/pictures')
+  // res.redirect('/pictures')
 })
+
 
 router.get('/new', (req, res) => {
   res.render('pictures/new')
@@ -72,7 +73,7 @@ router.post("/new", async function (req, res, next) {
     babka.pics.push(newPic)
     await babka.save()
     // filedata
-    res.render('pictures/new', { src1 })
+    res.redirect('/pictures')
   }
 });
 
@@ -151,7 +152,7 @@ router.delete('/:id', async (req, res) => {
       error: {}
     })
   }
-  res.redirect('/pictures')
+  
 
 })
 
