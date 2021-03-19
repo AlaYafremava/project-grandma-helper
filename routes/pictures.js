@@ -6,6 +6,14 @@ const fs = require('fs')
 const path = require('path')
 const Tesseract = require('tesseract.js')
 const { send } = require('process')
+// automatically pick platform
+const say = require('say')
+
+// or, override the platform
+// const Say = require('say').Say
+// const say = new Say('darwin' || 'win32' || 'linux')
+
+
 router.get('/', async (req, res) => {
   const { user } = req.session
   let pictures
@@ -121,8 +129,16 @@ router.post('/:id', async (req, res) => {
       await pic.save()
       res.json(text)
     })
-
 })
+
+router.post('/:id', async (req, res) => {
+  let pic = await Pic.findById(req.params.id)
+
+  say.speak(pic.text)
+
+  console.log('Text has been spoken.')
+});
+
 
 router.delete('/:id', async (req, res) => {
   try {
