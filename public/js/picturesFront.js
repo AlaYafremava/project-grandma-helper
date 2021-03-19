@@ -7,24 +7,18 @@
 // const readFile = document.querySelector('#readFile')
 
 
-readFile.addEventListener('click', async()=>{
- 
+readFile.addEventListener('click', async () => {
+
   const divPic = document.querySelector('.divPic')
   const id = divPic.id
 
-   console.log(divPic);
-
-
-
-  const response = await fetch(`/pictures/${id}`,{
+  const response = await fetch(`/pictures/${id}`, {
     method: 'POST',
-    headers:{
+    headers: {
       'Content-Type': 'application/json'
-    },
-   
+    }
   })
   const responseJson = await response.json()
-  
 })
 
 const deleteBtn = document.querySelector('#deleteFile')
