@@ -38,38 +38,58 @@ btnReadFile?.addEventListener('click', async () => {
 
 
 //удалить картинку со страницы pictures/:id
-const deleteBtn = document.querySelectorAll('.deleteFileButton')
+const deleteBtn = document.querySelector('#deleteFile')
 // console.log(deleteBtn);
 
-deleteBtn?.forEach((el) => {
-  el.addEventListener('click', async () => {
+deleteBtn?.addEventListener('click', async () => {
 
-    const divPic = document.querySelector('.divPic').parentNode.parentNode.parentNode
-    // console.log(divPic);
-    const id = divPic.id
-    // console.log(id);
+  const divPic = document.querySelector('.divPic')
+  const id = divPic.id
+  // console.log(id);
 
-    const response = await fetch(`/pictures/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "Application/json"
-      },
-      body: JSON.stringify(id)
-
-    })
-    const result = await response.json()
-
-    if (result.success) {
-      divPic.remove()
+  const response = await fetch(`/pictures/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "Application/json"
     }
   })
+  const result = await response.json()
+
+  if (result.success) {
+    divPic.remove()
+    window.location.href = '/'
+  }
 })
 
 
 //удалить картинку со страницы pictures
-// const deleteButtons = document.querySelectorAll('#delete')
+const deleteButtons = document.querySelectorAll('.deleteFileButton')
 // console.log(deleteButtons);
 
-// const formNewPic = document.querySelector('.formNewPic')
-// console.log(formNewPic);
+deleteButtons?.forEach(del => {
+  del.addEventListener('click', async (e) => {
+    const id2 = del.getAttribute('data-id')
+    // console.log(id2);
+    const divPic = document.getElementById(`${id2}`)
+    
+    const response = await fetch('/pictures', {
+
+      method: "DELETE",
+      headers: {
+        "Content-type": "Application/json"
+      },
+      body: JSON.stringify({id: divPic.id})
+
+    })
+
+    const result = await response.json()
+    // console.log(result);
+
+    if (result.success) {
+      divPic.remove()
+      window.location.href = '/'
+    }
+  })
+})
+
 

@@ -31,10 +31,11 @@
   <div class="box-page">
     {{#if grandMother}}
 
+
     {{#each pictures}}
     <div class="col s12 m6 pictures-Width">
-      <div class="card">
-        <div id={{this._id}} class="card-image divPic">
+      <div id={{this._id}}  class="card">
+        <div class="card-image divPic">
           <a href=pictures/{{this.id}} id='open-pic'>
             <img src={{this.src}}>
           </a>
@@ -42,7 +43,8 @@
         <div class="card-action">
           <button class="waves-effect waves-light btn-large listenFileButton">Listen it</button>
 
-          <button class="waves-effect waves-light btn-large deleteFileButton">Delete</button>
+          <button data-id={{this._id}}  class="waves-effect waves-light btn-large deleteFileButton">Delete</button>
+
         </div>
       </div>
     </div>
@@ -58,7 +60,8 @@
           </a>
         </div>
         <div class="card-action">
-          <button class="waves-effect waves-light btn-large deleteFileButton">Listen it</button>
+          <button class="waves-effect waves-light btn-large listenFileButton">Listen it</button>
+
         </div>
       </div>
     </div>
