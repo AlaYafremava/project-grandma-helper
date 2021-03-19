@@ -12,7 +12,9 @@ btnReadFile?.addEventListener('click', async()=>{
       'Content-Type': 'application/json'
     }
   })
-  const responseJson = await response.json()
+  const text = await response.json()
+
+  console.log(text);
 })
 
 //удалить картинку со страницы pictures/:id
@@ -41,8 +43,6 @@ deleteBtn?.forEach((el) => {
   })
 })
 
-// const formNewPic = document.querySelector('.formNewPic')
-// console.log(formNewPic);
 
 //удалить картинку со страницы pictures
 // const deleteButtons = document.querySelectorAll('#delete')

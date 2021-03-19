@@ -29,15 +29,20 @@
 <div class="row">
   <div class="col s12 m6">
     <div class="card">
+
       <div id={{this._id}} class="card-image divPic">
-        <img src={{this.src}}>
-        <a href=pictures/{{this.id}} id='open-pic' class="btn-floating halfway-fab waves-effect waves-light red"><i
-            class="material-icons">add</i></a>
+
+        <a href=pictures/{{this.id}} id='open-pic'>
+          <img src={{this.src}}>
+        </a>
+
       </div>
       <div class="card-action">
         <a href="">read</a>
         {{!-- {{#if grandMother}} --}}
+
         <button class="waves-effect waves-light btn-large deleteFileButton">Delete</button>
+
         {{!-- {{/if}} --}}
       </div>
     </div>
