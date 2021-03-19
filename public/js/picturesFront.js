@@ -4,7 +4,7 @@
 //   logger: (data) => console.log(data)
 // });
 
-// const readFile = document.querySelector('#readFile')
+const readFile = document.querySelector('#readFile')
 
 
 readFile.addEventListener('click', async()=>{
@@ -12,7 +12,7 @@ readFile.addEventListener('click', async()=>{
   const divPic = document.querySelector('.divPic')
   const id = divPic.id
 
-   console.log(divPic);
+  //  console.log(divPic);
 
 
 
