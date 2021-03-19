@@ -12,7 +12,9 @@ btnReadFile.addEventListener('click', async()=>{
       'Content-Type': 'application/json'
     }
   })
-  const responseJson = await response.json()
+  const text = await response.json()
+
+  console.log(text);
 })
 
 const deleteBtn = document.querySelector('#deleteFile')
@@ -36,6 +38,4 @@ deleteBtn.addEventListener('click', async () => {
   }
 })
 
-// const formNewPic = document.querySelector('.formNewPic')
-// console.log(formNewPic);
 

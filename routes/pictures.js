@@ -2,20 +2,10 @@ const router = require('express').Router()
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
-const Tesseract = require('tesseract.js');
-
-const reader = (src) => {
-  Tesseract.recognize(
-    src,
-    'eng'
-    // { logger: m => console.log(m) }
-  ).then(({ data: { text } }) => {
-    console.log(text);
-    console.log(typeof text);
-    return text;
-  })
-}
-
+const fs = require('fs')
+const path = require('path')
+const Tesseract = require('tesseract.js')
+const { send } = require('process')
 router.get('/', async (req, res) => {
   const { user } = req.session
   let pictures
@@ -40,7 +30,7 @@ router.get('/new', (req, res) => {
 router.post("/new", async function (req, res, next) {
 
   let filedata = req.file;
-  console.log(filedata);
+  // console.log(filedata);
 
   if (!filedata) {
 
@@ -81,17 +71,41 @@ router.get('/:id', async (req, res) => {
 })
 
 //reader
+// const reader = (src) => {
+//   Tesseract.recognize(
+//     src,
+//     'eng'
+//     // { logger: m => console.log(m) }
+//   ).then(({ data: { text } }) => {
+//     // console.log(text);
+//     // console.log(typeof text);
+//     return text;
+//   })
+// }
+
 router.post('/:id', async (req, res) => {
 
   let pic = await Pic.findById(req.params.id)
-  console.log(pic.src);
-  let path = `./public${pic.src}`
+  // console.log(pic);
+  // console.log(pic.src);
+  let link = `./public${pic.src}`
+  const img = fs.readFileSync(path.join(__dirname, '..', link), {
+    encoding: null
+  })
 
-  reader(path)
+  Tesseract.recognize(
+    img,
+    'rus', { logger: data => console.log(data) })
+    .then(async ({ data: { text } }) => {
+      pic.text = text
+      await pic.save()
+      // res.send(text)
+      // res.send(result.lines)
+    })
 
-  // return res.json({ pic: pic })
+  // pic.text = await recognize()
 
-  // res.render('pictures/pic', { src: pic.src, id: pic._id, user })
+  // await pic.save()
 
 })
 
