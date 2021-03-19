@@ -22,10 +22,17 @@ main {
 margin-bottom: 2px;
 }
 .body-button{
+  padding: 10px 15px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding-top: 7px;
+}
+.body-button_foto{
+  margin-right: 15px;
+  font-family: 'Ranchers', cursive;
+  font-size: 70px;
+  color: rgb(19, 19, 36);
 }
 @media (min-width: 601px){
 .row .col.m6 {
@@ -42,4 +49,110 @@ margin-bottom: 2px;
 .button-new_send .button-new{
 width:62px
 }
+#fotoSection{
+  position: relative;
+  width: 100%;
+  background: url('../img/sombrero-1082322_1920.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.container{
+  max-width: 100%;
+}
+nav{
+  background-color: black;
+}
+.page-footer{
+  background-color: black;
 
+}
+.registrForm{
+  position: absolute;
+  left: 15px  !important;
+  top: 15px;
+  max-width: 25%;
+  background-color: blanchedalmond;
+  border-radius: 15px;
+  opacity: 0.6;
+}
+.registrForm:hover{
+  opacity: 0.9;
+  
+}
+.btn, .btn-large, .btn-small{
+  background-color: #1c87c9;
+  /* background-color:  rgb(233, 61, 76); */
+  margin-bottom: 5px;
+}
+.btn, .btn-large, .btn-small:hover{
+  background-color: #1c87c9 !important;
+  /* background-color: rgb(233, 61, 76) !important; */
+  margin-bottom: 5px;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+  background-color: red;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+  border: 2px solid #c55927;
+}
+.formLogin{
+  padding: 15px;
+}
+.body-button_name{
+  font-size: 35px;
+  font-family: 'Ranchers', cursive;
+  color: rgba(0, 0, 0, 0.76);
+}
+.body-button_text{
+  font-weight: 500;
+  font-family: 'Ranchers', cursive;
+  font-size: 50px;
+  letter-spacing:3px;
+  word-spacing: 10px;
+}
+.body-button_button{
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.body-button-a{
+  width: 130px;
+  height: 60px;
+  opacity: 0.6;
+}
+.body-button-a:hover{
+  
+  opacity: 1;
+}
+
+#newForm{
+  background-color: rgb(241, 212, 212);
+  opacity: 0.6;
+  border-radius: 10px;
+  height: 136px;
+  padding: 10px;
+}
+#newForm:hover{
+  opacity: 0.7;
+  background-color: rgb(243, 188, 188);
+}
+#instruction{
+  animation: glowing 1500ms infinite; 
+}
+#add-pic{
+  animation: glowing 1500ms infinite;
+}
+@-webkit-keyframes glowing {
+  0% { background-color: #0091b2; -webkit-box-shadow: 0 0 6px #0091b2; }
+  50% { background-color: #21c7ed; -webkit-box-shadow: 0 0 15px #21c7ed; }
+  100% { background-color: #0091b2; -webkit-box-shadow: 0 0 6px #0091b2; }
+  }
+@keyframes glowing {
+  0% { background-color: #0091b2; -webkit-box-shadow: 0 0 6px #0091b2; }
+  50% { background-color: #21c7ed; -webkit-box-shadow: 0 0 15px #21c7ed; }
+  100% { background-color: #0091b2; -webkit-box-shadow: 0 0 6px #0091b2; }
+  }
+.body-title{
+  justify-content: space-around;
+}

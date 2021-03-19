@@ -23,6 +23,20 @@ router.get('/', async (req, res) => {
   res.render('pictures/pictures', { user, pictures })
 })
 
+router.delete('/', async (req, res) => {
+  try {
+    const id = req.body.id
+    await Pic.findByIdAndDelete(id)
+    res.json({ success: true })
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось получить запись из базы данных.',
+      error: {}
+    })
+  }
+  res.redirect('/pictures')
+})
+
 router.get('/new', (req, res) => {
   res.render('pictures/new')
 })
