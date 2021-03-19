@@ -1,6 +1,6 @@
 <div class='body-button'>
-  <div class = 'body-button_name' >
-    <p> Hello, {{this.name}}!</p>
+  <div class='body-button_name'>
+    <p> Hello, {{user.name}}!</p>
     <p> We are glade to see you!</p>
   </div>
   {{#if grandMother}}
@@ -8,8 +8,9 @@
     <p> Let's add some new pictures!</p>
   </div>
   <div class="body-button_button">
-    <a  href="instruction"><button id="instruction" class="body-button-a waves-effect waves-light btn">instruction</button></a>
-    <a  href="pictures/new"><button id="add-pic" class="body-button-a waves-effect waves-light btn">add pic</button></a>
+    <a href="instruction"><button id="instruction"
+        class="body-button-a waves-effect waves-light btn">instruction</button></a>
+    <a href="pictures/new"><button id="add-pic" class="body-button-a waves-effect waves-light btn">add pic</button></a>
   </div>
   {{else}}
   {{#if pictures}}
@@ -24,6 +25,8 @@
   {{/if}}
 </div>
 
+
+{{#if grandMother}}
 {{#each pictures}}
 
 <div class="row">
@@ -38,14 +41,36 @@
 
       </div>
       <div class="card-action">
-        <a href="">read</a>
-        {{!-- {{#if grandMother}} --}}
+        <button class="waves-effect waves-light btn-large deleteFileButton">Tell me</button>
 
         <button class="waves-effect waves-light btn-large deleteFileButton">Delete</button>
 
-        {{!-- {{/if}} --}}
       </div>
     </div>
   </div>
 </div>
 {{/each}}
+{{else}}
+{{#each pictures}}
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card">
+
+      <div id={{this._id}} class="card-image divPic">
+
+        <a href=pictures/{{this.id}} id='open-pic'>
+          <img src={{this.src}}>
+        </a>
+
+      </div>
+      <div class="card-action">
+        <button class="waves-effect waves-light btn-large deleteFileButton">Tell me</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
+
+{{/if}}

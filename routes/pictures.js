@@ -20,12 +20,13 @@ router.get('/', async (req, res) => {
 
   // console.log(pictures);
 
-  res.render('pictures/pictures', { user, pictures })
+  res.render('pictures/pictures', { user, pictures, title: 'Collections of pictures' })
 })
 
 router.delete('/', async (req, res) => {
   try {
     const id = req.body.id
+    console.log(id);
     await Pic.findByIdAndDelete(id)
     res.json({ success: true })
   } catch (error) {
@@ -107,19 +108,19 @@ router.post('/:id', async (req, res) => {
     encoding: null
   })
 
+  if (!pic.text === '') {
+    res.json(pic.text)
+
+  }
+
   Tesseract.recognize(
     img,
     'rus', { logger: data => console.log(data) })
     .then(async ({ data: { text } }) => {
       pic.text = text
       await pic.save()
-      // res.send(text)
-      // res.send(result.lines)
+      res.json(text)
     })
-
-  // pic.text = await recognize()
-
-  // await pic.save()
 
 })
 
