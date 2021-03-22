@@ -2,6 +2,17 @@ const router = require('express').Router()
 const Grandma = require('../models/grandma')
 const Son = require('../models/son')
 const Pic = require('../models/pic')
+const fs = require('fs')
+const path = require('path')
+const Tesseract = require('tesseract.js')
+const { send } = require('process')
+
+// automatically pick platform
+const say = require('say')
+
+// or, override the platform
+// const Say = require('say').Say
+// const say = new Say('darwin' || 'win32' || 'linux')
 
 
 router.get('/', async (req, res) => {
@@ -12,14 +23,29 @@ router.get('/', async (req, res) => {
     pictures = await Pic.find({ author: user._id })
 
   } else {
-    const grandmaId = (await Son.findOne({email: user.email}).populate('grandma')).grandma._id
+    const grandmaId = (await Son.findOne({ email: user.email }).populate('grandma')).grandma._id
     pictures = await Pic.find({ author: grandmaId })
   }
 
   // console.log(pictures);
 
-  res.render('pictures/pictures', { user, pictures })
+  res.render('pictures/pictures', { user, pictures, title: 'Collections of pictures' })
 })
+
+router.delete('/', async (req, res) => {
+  try {
+    const id = req.body.id
+
+    await Pic.findByIdAndDelete(id)
+    console.log(id);
+
+    return res.json({ success: true })
+  } catch (error) {
+    return error
+  }
+  // res.redirect('/pictures')
+})
+
 
 router.get('/new', (req, res) => {
   res.render('pictures/new')
@@ -35,10 +61,8 @@ router.post("/new", async function (req, res, next) {
     res.send("Ошибка при загрузке файла");
   } else {
     let src1 = `/uploads/${req.file.filename}`
-    // console.log(req.file.filename);
 
     const { user } = req.session
-
     const babka = await Grandma.findOne({ email: user.email })
 
     const newPic = await Pic.create({
@@ -48,8 +72,8 @@ router.post("/new", async function (req, res, next) {
 
     babka.pics.push(newPic)
     await babka.save()
-
-    res.render('pictures/new', { src1 })
+    // filedata
+    res.redirect('/pictures')
   }
 });
 
@@ -66,22 +90,70 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  // console.log(pic.src);
-  
-  res.render('pictures/pic', { src: pic.src, id:pic.id, user })
+  res.render('pictures/pic', { src: pic.src, id: pic.id, user })
 
 })
 
+//reader
+// const reader = (src) => {
+//   Tesseract.recognize(
+//     src,
+//     'eng'
+//     // { logger: m => console.log(m) }
+//   ).then(({ data: { text } }) => {
+//     // console.log(text);
+//     // console.log(typeof text);
+//     return text;
+//   })
+// }
 
-router.post('/:id', async (req,res)=>{
-  
+router.post('/:id', async (req, res) => {
+
   let pic = await Pic.findById(req.params.id)
- 
-  return res.json({pic:pic})
+  // console.log(pic);
+  // console.log(pic.src);
+  let link = `./public${pic.src}`
+  const img = fs.readFileSync(path.join(__dirname, '..', link), {
+    encoding: null
+  })
+
+  if (!pic.text === '') {
+    res.json(pic.text)
+
+  }
+
+  Tesseract.recognize(
+    img,
+    'rus', { logger: data => console.log(data) })
+    .then(async ({ data: { text } }) => {
+      pic.text = text
+      await pic.save()
+      res.json(text)
+    })
+})
+
+router.post('/:id', async (req, res) => {
+  let pic = await Pic.findById(req.params.id)
+
+  say.speak(pic.text)
+
+  console.log('Text has been spoken.')
+});
+
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    await Pic.findByIdAndDelete(id)
+    res.json({ success: true })
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось получить запись из базы данных.',
+      error: {}
+    })
+  }
+  
+
 })
 
 module.exports = router
-
-
-//read img
-

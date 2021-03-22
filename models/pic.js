@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const picSchema = new mongoose.Schema({
   src: String,
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'grandmas' }
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'grandmas' },
+  text: {type: String, default: ''}
 })
 
 // показывает 5 последних картинок
