@@ -13,7 +13,7 @@ router
   .get(sessionChecker, (req, res) => {
 
     // console.log(666);
-    res.render('auth/registration');
+    res.render('auth/registration', {title: 'Registration'});
   })
   .post(async (req, res, next) => {
     try {
@@ -54,7 +54,7 @@ router
   .route("/login")
 
   .get(sessionChecker, (req, res) => {
-    res.render("auth/login");
+    res.render("auth/login", {title: 'Login'});
   })
   .post(async (req, res) => {
     const { email, password } = req.body;

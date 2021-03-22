@@ -1,45 +1,67 @@
-<div class='body-button'>
-  <div>
-    <p> Hello, {{this.name}}!</p>
-    <p> We are glade to see you!</p>
-  </div>
-  {{#if grandMother}}
-  <div>
-    <p> Let's add some new pictures!</p>
-  </div>
-  <div>
-    <a href="instruction"><button id="instruction" class="waves-effect waves-light btn">instruction</button></a>
-    <a href="pictures/new"><button id="add-pic" class="waves-effect waves-light btn">add pic</button></a>
-  </div>
-  {{else}}
-  {{#if pictures}}
-  <div>
-    <p> Your grandma has a great collection!</p>
-  </div>
-  {{else}}
-  <div>
-    <p> Ops! Your grandma's collection is empty...</p>
-  </div>
-  {{/if}}
-  {{/if}}
-</div>
-
-{{#each pictures}}
-<div class="row">
-  <div class="col s12 m6">
-    <div class="card">
-      <div id={{this._id}} class="card-image">
-        <img src={{this.src}}>
-        <a href=pictures/{{this.id}} id='open-pic' class="btn-floating halfway-fab waves-effect waves-light red"><i
-            class="material-icons">add</i></a>
+<div class="container">
+  <div class='body-button'>
+    <div>
+      <div class='body-button_name'>
+        <p> Hello, {{user.name}}!</p>
+        <p> We are glade to see you!</p>
       </div>
-      <div class="card-action">
-        <a href="">read</a>
-        {{#if grandMother}}
-        <a href="">delete</a>
-        {{/if}}
+      {{#if grandMother}}
+      <div class="body-button_text">
+        <p> Let's add some new pictures!</p>
       </div>
     </div>
+    <div class="body-button_button">
+      <a href="instruction"><button id="instruction"
+          class="body-button-a waves-effect waves-light btn">instruction</button></a>
+      <a href="pictures/new"><button id="add-pic" class="body-button-a waves-effect waves-light btn">add
+          pic</button></a>
+    </div>
+    {{else}}
+    {{#if pictures}}
+    <div class="body-button_text">
+      <p> Your grandma has a great collection!</p>
+    </div>
+    {{else}}
+    <div class="body-button_text">
+      <p> Ops! Your grandma's collection is empty...</p>
+    </div>
+    {{/if}}
+    {{/if}}
+  </div>
+  <div class="box-page">
+    {{#if grandMother}}
+
+
+    {{#each pictures}}
+    <div class="col s12 m6 pictures-Width">
+      <div id={{this._id}} class="card">
+        <div class="card-image divPic">
+          <a href=pictures/{{this.id}} id='open-pic'>
+            <img src={{this.src}}>
+          </a>
+        </div>
+        <div class="card-action">
+
+          <button data-id={{this._id}} class="waves-effect waves-light btn-large deleteFileButton">Delete</button>
+
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+    {{else}}
+
+    {{#each pictures}}
+    <div class="col s12 m6 pictures-Width">
+      <div id={{this._id}} class="card">
+        <div class="card-image divPic">
+          <a href=pictures/{{this.id}} id='open-pic'>
+            <img src={{this.src}}>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{/if}}
   </div>
 </div>
-{{/each}}
